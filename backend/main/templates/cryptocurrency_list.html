@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Топ криптовалют</title>
+    <style>
+        body { font-family: sans-serif; background: #1e3aa8; color: white; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid #f0c000; text-align: center; }
+        .filter { background: #1e3aa8; padding: 20px; border: 2px solid #f0c000; margin: 20px auto; width: 400px; }
+        label { display: block; margin: 10px 0 5px; }
+        input, select { width: 100%; padding: 5px; font-size: 16px; }
+        .avg { margin: 20px auto; font-size: 20px; }
+    </style>
+</head>
+<body>
+
+<h1 style="text-align:center;">Топ криптовалют</h1>
+
+<div class="filter">
+    <form method="get">
+        <label>Поиск по названию</label>
+        <input type="text" name="search" placeholder="BTC, ETH..." value="{{ search }}">
+
+        <label>Максимальная цена</label>
+        <input type="number" name="max_price" step="0.00000001" placeholder="1000" value="{{ max_price }}">
+
+        <label>Сортировка</label>
+        <select name="sort">
+            <option value="desc" {% if sort == "desc" %}selected{% endif %}>По убыванию</option>
+            <option value="asc" {% if sort == "asc" %}selected{% endif %}>По возрастанию</option>
+        </select>
+
+        <button type="submit" style="margin-top: 10px; padding: 5px 20px;">Применить</button>
+    </form>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Название</th>
+            <th>Символ</th>
+            <th>Сеть</th>
+            <th>Цена ($)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for crypto in cryptocurrencies %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ crypto.name }}</td>
+            <td>{{ crypto.symbol }}</td>
+            <td>{{ crypto.network }}</td>
+            <td>${{ crypto.price|floatformat:2 }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">Нет данных</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if average_price %}
+<div class="avg" style="text-align:center;">
+    Средняя цена: ${{ average_price|floatformat:2 }}
+</div>
+{% endif %}
+
+</body>
+</html>

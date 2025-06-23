@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ object.title }}</title>
+</head>
+<body>
+    <h1>{{ object.title }}</h1>
+    <p>Описание: {{ object.description }}</p>
+    <p>Дата начала: {{ object.start_date }}</p>
+    <p>Дата окончания: {{ object.end_date }}</p>
+
+    {% if object.is_active %}
+        <p style="color: green;">Статус: Акция активна ✅</p>
+    {% else %}
+        <p style="color: red;">Статус: Акция завершена ❌</p>
+    {% endif %}
+
+    <h2>{{ promo.title }}</h2>
+    <p>{{ promo.description }}</p>
+    <a href="{% url 'promotions_list' %}">Назад к списку</a>
+</body>
+</html>

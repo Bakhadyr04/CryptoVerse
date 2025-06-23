@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Редактировать акцию</title>
+</head>
+<body>
+  <h1>Редактировать акцию</h1>
+
+  {% if error %}
+    <p style="color:red;">{{ error }}</p>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <label>Название:</label><br>
+    <input type="text" name="title" value="{{ promo.title }}" required><br><br>
+
+    <label>Описание:</label><br>
+    <textarea name="description">{{ promo.description }}</textarea><br><br>
+
+    <button type="submit">Сохранить</button>
+  </form>
+
+  <p><a href="{% url 'promotions_list' %}">Назад к списку акций</a></p>
+</body>
+</html>
