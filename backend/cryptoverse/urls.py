@@ -44,7 +44,8 @@ urlpatterns = [
     path('cryptocurrencies/<int:pk>/update/', views.cryptocurrency_update, name='cryptocurrency_update'),
     path('cryptocurrencies/<int:pk>/delete/', views.cryptocurrency_delete, name='cryptocurrency_delete'),
     path('cryptocurrencies/<int:pk>/', views.cryptocurrency_detail, name='cryptocurrency_detail'),
-
+    
+    path('brexam/', views.brexam_list, name='brexam_list'),
 ]
 
 if settings.DEBUG:

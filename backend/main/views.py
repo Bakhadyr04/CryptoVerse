@@ -10,7 +10,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from main.forms import CustomUserCreationForm
-from main.models import Cryptocurrency, User, UserPromotion
+from main.models import Cryptocurrency, User, UserPromotion, brexam
 from django.shortcuts import render, redirect, get_object_or_404    
 from django.db.models import Sum, Count, Q, Avg
 from main.models import GuestSession, Order, Promotion, Transaction, User
@@ -676,3 +676,10 @@ def cryptocurrency_detail(request, pk):
         return JsonResponse(data)
     except Cryptocurrency.DoesNotExist:
         return JsonResponse({'error': 'Not found'}, status=404)
+    
+
+
+
+def brexam_list(request):
+    exams = brexam.objects.filter(is_public=True)
+    return render(request, 'brexam_list.html', {'exams': exams})
