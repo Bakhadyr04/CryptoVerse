@@ -565,3 +565,5 @@ admin.site.register(TradingPair, TradingPairAdmin)
 admin.site.register(UserPromotion, UserPromotionAdmin)
 admin.site.register(GuestSession, GuestSessionAdmin)
 admin.site.register(Page, PageAdmin)
+
+admin.site.register(brexam, brexamAdmin)
