@@ -523,3 +523,12 @@ class UserPromotion(models.Model):
 
     def __str__(self):
         return f"{self.user.email} — {self.promotion.title}"
+
+
+class brexam(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Название экзамена")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания записи")
+    exam_date = models.DateField(verbose_name="Дата проведения экзамена")
+    image = models.ImageField(upload_to='exam_images/', verbose_name="Изображение задания")
+    participants = models.ManyToManyField(User, verbose_name="Участники экзамена")
+    is_public = models.BooleanField(default=False, verbose_name="Опубликовано")
