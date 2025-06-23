@@ -530,6 +530,7 @@ class GuestSessionAdmin(admin.ModelAdmin):
         """Разрешает просмотр сессий."""
         return True
 
+
 class PageAdmin(admin.ModelAdmin):
     """
     Управление страницами, доступными в системе.
@@ -538,6 +539,15 @@ class PageAdmin(admin.ModelAdmin):
     search_fields = ("page_name",)
     list_filter = ("can_view", "created_at")
     date_hierarchy = "created_at"
+
+
+# Модель brexam для админки
+class brexamAdmin(admin.ModelAdmin):
+    list_display = ('name', 'exam_date', 'is_public', 'created_at')
+    list_filter = ('is_public', 'created_at', 'exam_date')
+    search_fields = ('name', 'participants__email')
+    filter_horizontal = ('participants',)
+    date_hierarchy = 'exam_date'
 
 
 admin.site.register(User, UserAdmin)
